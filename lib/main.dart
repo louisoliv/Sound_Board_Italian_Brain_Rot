@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       id: 0,
       pathSong: 'sounds/italian-brainrot-Balerina-capuccina.mp3',
       name: 'Balerina capuccina',
-      pathImage: 'assets/images/Ballerina-Cappuccina.png',
+      pathImage: 'assets/images/Ballerina-Cappuccina2.png',
     ),
     Song(
       id: 1,
@@ -204,46 +204,63 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.yellow, title: Text(widget.title)),
-      body: Center(
-        child: GridView.count(
-          primary: false,
-          crossAxisCount: 3,
-          children: List.generate(soundPaths.length, (index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                // style: ButtonStyle(),
-                onPressed: () async {
-                  print("ça clique !");
-
-                  await player.play(AssetSource(soundPaths[index].pathSong));
-                  // await player.stop();
-                },
-                child: Align(
-                  alignment: Alignment.center,
-
-                  // child: Text(
-                  //   soundPaths[index].name,
-                  //   style: TextStyle(fontSize: 14.0),
-                  //   textAlign: TextAlign.center,
-                  // ),
-                  child: Image.asset(
-                    soundPaths[index].pathImage,
-                    fit: BoxFit.cover,
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          height: 775, // ou MediaQuery pour s'adapter à l'écran
+          child: Column(
+            children: [
+              Expanded(
+                child: GridView.count(
+                  padding: EdgeInsets.only(top: 2),
+                  primary: false,
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 16.0,
+                  children: List.generate(soundPaths.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                backgroundColor: Colors.transparent,
+                              ),
+                              clipBehavior: Clip.hardEdge,
+                              onPressed: () async {
+                                await player.play(
+                                  AssetSource(soundPaths[index].pathSong),
+                                );
+                              },
+                              child: Image.asset(
+                                soundPaths[index].pathImage,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            soundPaths[index].name,
+                            style: TextStyle(fontSize: 14.0),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                 ),
               ),
-            );
-          }),
+            ],
+          ),
         ),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print("Clicked");
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

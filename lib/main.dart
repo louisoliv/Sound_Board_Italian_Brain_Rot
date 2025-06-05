@@ -197,6 +197,18 @@ class _MyHomePageState extends State<MyHomePage> {
       name: 'Tsung tsung sahur',
       pathImage: 'assets/images/Sahur.png',
     ),
+    Song(
+      id: 25,
+      pathSong: 'sounds/BRR-BRR-PATAPIM-FUNK.mp3',
+      name: 'Patapim Funk',
+      pathImage: 'assets/images/BRR-BRR-PATAPIM.png',
+    ),
+    Song(
+      id: 26,
+      pathSong: 'sounds/le-poisson-steve.mp3',
+      name: 'Poisson Steve',
+      pathImage: 'assets/images/le-poisson-steve.png',
+    ),
   ];
   final AudioPlayer player = AudioPlayer();
 
@@ -205,14 +217,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.yellow, title: Text(widget.title)),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(6.0),
         child: SizedBox(
           height: 775, // ou MediaQuery pour s'adapter à l'écran
           child: Column(
             children: [
               Expanded(
                 child: GridView.count(
-                  padding: EdgeInsets.only(top: 2),
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
                   primary: false,
                   crossAxisCount: 3,
                   mainAxisSpacing: 16.0,
